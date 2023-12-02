@@ -1,0 +1,14 @@
+.img {
+    width: 80px;
+    border-radius: 50%;
+    position: absolute;
+    left: 20px;
+}
+.title {
+    position: relative;
+    left: 40px;
+    color: #0d6efd;
+}
+.header {
+    padding: 10px;
+}

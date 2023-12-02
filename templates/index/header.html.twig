@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('index.css', 'css') }}">
+{% endblock %}
+
+{% block body %}
+    <div>
+        <header class="header d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                <img class="img" src="{{ asset('logo.png', 'images') }}">
+                <span class="title fs-4 head">ZinClinic</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <ul class="list-unstyled">
+                    <li class="nav-item" style="color: #0d6efd">ул. Бигичева, д. 3</li>
+                    <li class="nav-item" style="color: #0d6efd">ул. Ямашева, д. 73</li>
+                </ul>
+                <li class="nav-item"><a class="nav-link">+7 (952) 030-25-80</a></li>
+                <li class="nav-item"><a href="" class="nav-link">О клинике</a></li>
+                <li class="nav-item"><a href="" class="nav-link">Отзывы</a></li>
+                <li class="nav-item"><a href="" class="nav-link">Услуги</a></li>
+                {% if not is_granted("ROLE_USER") %}
+                    <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link active" aria-current="page">Войти</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ path('app_logout') }}" class=" btn btn-danger" aria-current="page">Выйти</a></li>
+                {% endif %}
+            </ul>
+        </header>
+    </div>
+{% endblock %}

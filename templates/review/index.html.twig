@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReviewController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('review.css', 'css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+{% endblock %}
+
+{% block body %}
+    {% set sum = 0 %}
+    {% set col = 0 %}
+
+    {% for review in reviews %}
+        {% set col = col + 1 %}
+        {% set sum = sum + review.score %}
+    {% endfor %}
+
+    <header><a class="btn btn-primary" href="{{ path('app_index') }}">Назад</a></header>
+    <div class="koguvcavis-varazdel">
+        <div class="sestim-donials">
+            ⭐<span>Рейтинг</span>⭐ {{ sum / col }}
+            <h1>Отзывы</h1>
+            <div class="sectionesag"></div>
+            <div class="sagestim-lonials">
+                {% for review in reviews %}
+                    <div class="vemotau-vokusipol">
+                        <div class="testimonial">
+                            <div class="gecedanam">{{ review.reviewer.firstName }} {{ review.reviewer.secondName }}</div>
+                            <div class="apogered-gselected">
+                                {% for _ in 1..review.score %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                            </div>
+                            <p>{{ review.comment }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% if is_granted('ROLE_USER') %}
+        {{ form(form) }}
+    {% else %}
+        <span>Чтобы оставить отзыв необходимо <a
+                    class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                    href="{{ path('app_login') }}">авторизоваться</a></span>
+    {% endif %}
+{% endblock %}

@@ -8,8 +8,10 @@
 {% endblock %}
 
 {% block body %}
-    <a class="btn btn-primary" href="{{ path('app_index') }}">Назад</a>
-    <div class="register">
+    <header><a class="btn btn-primary" href="{{ path('app_index') }}">Назад</a></header>
+    <div class="form">
+        <div class="field">
         {{ form(form) }}
+        </div>
     </div>
 {% endblock %}

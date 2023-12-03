@@ -1,3 +1,20 @@
-.register {
+.field {clear:both; text-align:right;}
+label {float:left; padding-right:10px;}
+.form {
+    float:left;
+    position: relative;
+    left: 35%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(45deg, greenyellow, dodgerblue);
+    font-family: "Sansita Swashed", cursive;
+}
+header {
     padding: 10px;
 }

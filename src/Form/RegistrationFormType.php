@@ -8,18 +8,50 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("firstName", TextType::class)
-            ->add("secondName", TextType::class)
-            ->add("thirdName", TextType::class)
-            ->add("email", EmailType::class)
-            ->add("password", PasswordType::class)
-            ->add("phoneNumber", TextType::class)
-            ->add("submit", SubmitType::class, ['attr' => ['class' => 'btn btn-success']]);
+            ->add("firstName", TextType::class, [
+                'label' => 'Имя',
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex('/^[^\d]*$/', message: 'В имени не должно быть цифр!')
+                ]
+            ])
+            ->add("secondName", TextType::class, [
+                'label' => 'Фамилия',
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex('/^[^\d]*$/', message: 'В фамилии не должно быть цифр!')
+                ]
+            ])
+            ->add("thirdName", TextType::class, [
+                'label' => 'Отчество',
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex('/^[^\d]*$/', message: 'В отчестве не должно быть цифр!')
+                ]
+            ])
+            ->add("email", EmailType::class, [
+                'constraints' => new NotBlank(),
+            ])
+            ->add("password", PasswordType::class, [
+                'label' => 'Пароль'
+            ])
+            ->add("phoneNumber", TextType::class, [
+                'label' => 'Номер телефона',
+                'constraints' => new Regex('/^\+?[1-9][0-9]{7,14}$/', message: 'Неправильно введен номер')
+            ])
+            ->add("submit", SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-success',
+                ],
+                'label' => 'Регистрация',
+            ]);
     }
 }

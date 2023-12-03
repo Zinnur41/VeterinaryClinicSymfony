@@ -23,7 +23,7 @@
                 </ul>
                 <li class="nav-item"><a class="nav-link">+7 (952) 030-25-80</a></li>
                 <li class="nav-item"><a href="" class="nav-link">О клинике</a></li>
-                <li class="nav-item"><a href="" class="nav-link">Отзывы</a></li>
+                <li class="nav-item"><a href="{{ path('app_review') }}" class="nav-link">Отзывы</a></li>
                 <li class="nav-item"><a href="" class="nav-link">Услуги</a></li>
                 {% if not is_granted("ROLE_USER") %}
                     <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link active" aria-current="page">Войти</a></li>

@@ -59,3 +59,57 @@
         max-width: 100%;
     }
 }
+
+.borzoiDog {
+    position: relative;
+    width: 130px;
+    border-radius: 50%;
+}
+.image {
+    position: absolute;
+    bottom: 335px;
+    left: 50px;
+}
+.description {
+    position: relative;
+    right: 65px;
+    background-color: white;
+    padding: 10px 20px;
+}
+.arrow-7 {
+    position: absolute;
+    bottom: 385px;
+    left: 210px;
+    margin: 40px auto 10px auto;
+    width: 38px;
+    height: 100px;
+}
+.arrow-7 span {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-bottom: 5px solid #337AB7;
+    border-right: 5px solid #337AB7;
+    transform: rotate(45deg);
+    margin: -16px 0;
+    animation: arrow-7 2s infinite;
+}
+.arrow-7 span:nth-child(2){
+    animation-delay: -0.2s;
+}
+.arrow-7 span:nth-child(3){
+    animation-delay: -0.4s;
+}
+@keyframes arrow-7 {
+    0%{
+        opacity: 0;
+        transform: translate(0,-20px) rotate(45deg);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: translate(0,20px) rotate(45deg);
+    }
+}

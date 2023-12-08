@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ReviewController!{% endblock %}
+{% block title %}Отзывы{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,18 +9,10 @@
 {% endblock %}
 
 {% block body %}
-    {% set sum = 0 %}
-    {% set col = 0 %}
+    {% include 'index/header.html.twig' %}
 
-    {% for review in reviews %}
-        {% set col = col + 1 %}
-        {% set sum = sum + review.score %}
-    {% endfor %}
-
-    <header><a class="btn btn-primary" href="{{ path('app_index') }}">Назад</a></header>
     <div class="koguvcavis-varazdel">
         <div class="sestim-donials">
-            ⭐<span>Рейтинг</span>⭐ {{ sum / col }}
             <h1>Отзывы</h1>
             <div class="sectionesag"></div>
             <div class="sagestim-lonials">
@@ -41,10 +33,26 @@
         </div>
     </div>
     {% if is_granted('ROLE_USER') %}
-        {{ form(form) }}
+        <div id="form">
+            {{ form(form) }}
+        </div>
+        <div class="image">
+            <img class="borzoiDog" src="{{ asset('borzoiDog.png', 'images') }}" alt="Ошибка">
+            <div class="description">
+                <p>Оставьте, пожалуйста, ваш отзыв</p>
+            </div>
+        </div>
+        <a href="#form">
+            <div class="arrow-7">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </a>
     {% else %}
-        <span>Чтобы оставить отзыв необходимо <a
+        <p>Чтобы оставить отзыв необходимо <a
                     class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                    href="{{ path('app_login') }}">авторизоваться</a></span>
+                    href="{{ path('app_login') }}">авторизоваться</a></p>
     {% endif %}
 {% endblock %}
+

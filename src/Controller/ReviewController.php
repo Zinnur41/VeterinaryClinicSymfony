@@ -15,6 +15,7 @@ class ReviewController extends AbstractController
     public function index(Request $request, ReviewService $reviewService): Response
     {
         $reviews = $reviewService->getAllReviews();
+        $averageScore = $reviewService->getAverageScore();
 
         $form = $this->createForm(ReviewFormType::class);
 
@@ -28,7 +29,8 @@ class ReviewController extends AbstractController
 
         return $this->render('review/index.html.twig', [
             'form' => $form->createView(),
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'averageScore' => $averageScore
         ]);
     }
 }

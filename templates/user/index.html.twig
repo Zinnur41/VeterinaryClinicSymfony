@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('profile.css', 'css') }}">
+{% endblock %}
+
+{% block body %}
+    {% include 'index/header.html.twig' %}
+    {% if user.pets is not empty %}
+        <h1>🐱Мои питомцы🐶</h1>
+    {% endif %}
+    <div class="pets row row-cols-1 row-cols-md-3 g-4">
+        {% for pet in user.pets %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pet.name }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Порода: {{ pet.breed }}</li>
+                    <li class="list-group-item">Пол: {{ pet.gender }}</li>
+                    {% if pet.age == 1 or pet.age == 2 or pet.age == 3 or pet.age == 4 %}
+                        <li class="list-group-item">Возраст: {{ pet.age }} года</li>
+                    {% else %}
+                        <li class="list-group-item">Возраст: {{ pet.age }} лет</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="css-modal-details">
+    <details>
+        <summary>Добавить питомца</summary>
+        <div class="cmc">
+            <div class="cmt">
+                {{ form(form) }}
+            </div>
+        </div>
+    </details>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/addPetModal.js') }}"></script>
+{% endblock %}
+
+
+
+
+
+

@@ -33,4 +33,11 @@ class ReviewService
         $this->entityManager->persist($review);
         $this->entityManager->flush();
     }
+
+    public function getAverageScore()
+    {
+        $reviewCount = $this->entityManager->getRepository(Review::class)->getCount();
+        $scoresSum = $this->entityManager->getRepository(Review::class)->findScores();
+        return round($scoresSum / $reviewCount, 2);
+    }
 }

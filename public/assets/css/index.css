@@ -12,3 +12,9 @@
 .header {
     padding: 10px;
 }
+.score {
+    position: absolute;
+    top: 25px;
+    left: 20%;
+
+}

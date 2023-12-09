@@ -1,7 +1,13 @@
+body { overflow-x:hidden; }
+
+.myPets {
+    text-align: center;
+}
+
 .pets {
     padding: 30px;
     position: relative;
-    left: 100px;
+    left: 50px;
 }
 
 .css-modal-details {

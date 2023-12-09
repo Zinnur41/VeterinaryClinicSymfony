@@ -23,11 +23,6 @@ class UserService
         $this->security = $security;
     }
 
-    public function getAllUsers(): array
-    {
-        return $this->entityManager->getRepository(User::class)->findAll();
-    }
-
     public function addUser(array $fields): void
     {
         $user = new User();
@@ -51,7 +46,7 @@ class UserService
         return $this->security->getUser();
     }
 
-    public function addPet(array $fields): void
+    public function addPet(array $fields, $image): void
     {
         $pet = new Pet();
         $user = $this->security->getUser();
@@ -60,6 +55,8 @@ class UserService
         $pet->setBreed($fields['breed']);
         $pet->setAge($fields['age']);
         $pet->setGender($fields['gender']);
+        $pet->setWeight($fields['weight']);
+        $pet->setImage($image);
         $pet->setOwner($user);
 
         $this->entityManager->persist($pet);

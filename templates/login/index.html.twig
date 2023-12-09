@@ -2,24 +2,28 @@
 
 {% block title %}Вход{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('login.css', 'css') }}"
+{% endblock %}
+
 {% block body %}
-    {% include 'index/header.html.twig' %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
-
-        <input type="hidden" name="_target_path" value="{{ path('app_index') }}">
-
-        <input type="submit" value="login">
-        <br>
-        <br>
-        <p>Новый пользователь? <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_registration') }}">Регистрация</a></p>
-    </form>
+    <header><a class="btn btn-primary" href="{{ path('app_index') }}">Назад</a></header>
+    <div class="center">
+        <h1>Вход</h1>
+        <form action="{{ path('app_login') }}" method="post">
+            <div class="inputbox">
+                <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+                <span>Email</span>
+            </div>
+            <div class="inputbox">
+                <input type="password" id="password" name="_password"/>
+                <span>Пароль</span>
+            </div>
+            <div class="inputbox">
+                <input type="submit" value="Вход">
+            </div>
+            <span>Новый пользователь?</span> <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_registration') }}">Регистрация</a>
+        </form>
+    </div>
 {% endblock %}

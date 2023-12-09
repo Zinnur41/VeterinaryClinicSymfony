@@ -3,6 +3,8 @@ label {float:left; padding-right:10px;}
 .form {
     float:left;
     position: relative;
+    background-color: rgba(230, 240, 240, 0.6);
+    border-radius: 10px;
     left: 35%;
 }
 body {
@@ -10,9 +12,9 @@ body {
     padding: 0;
     box-sizing: border-box;
     justify-content: center;
+    background-image: url("../images/registerBackground.png");
     align-items: center;
     height: 100vh;
-    background: linear-gradient(45deg, greenyellow, dodgerblue);
     font-family: "Sansita Swashed", cursive;
 }
 header {

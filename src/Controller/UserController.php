@@ -22,12 +22,22 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $userService->addPet($data);
-            return $this->redirectToRoute('app_user');
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $imageName = uniqid() . '.' . $imageFile->guessExtension();
+
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $imageName
+                );
+                $data = $form->getData();
+                $userService->addPet($data, $imageName);
+                return $this->redirectToRoute('app_user');
+            }
         }
 
         $user = $userService->getUser();
+
         return $this->render('user/index.html.twig', [
             'user' => $user,
             'form' => $form,

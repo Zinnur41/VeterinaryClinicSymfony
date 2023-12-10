@@ -1,11 +1,67 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}Ветеринарная клиника{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('mainPage.css', 'css') }}"
+{% endblock %}
 
 {% block body %}
     {% include 'index/header.html.twig' %}
     <div class="main">
-        <h1>Ветеринарная клиника</h1>
+        <div class="slperekhodnik">
+            <aside class="gablok_sedakoda">
+                <div class="slayder_karusel">
+                    <figure><img src="{{ asset('slider/img.png', 'images') }}" alt="">
+                        <figcaption>Стерилизация</figcaption>
+                    </figure>
+                    <figure><img src="{{ asset('slider/img_1.png', 'images') }}" alt="">
+                        <figcaption>Хирургия</figcaption>
+                    </figure>
+                    <figure><img src="{{ asset('slider/img_2.png', 'images') }}" alt="">
+                        <figcaption>Рентген</figcaption>
+                    </figure>
+                    <figure><img src="{{ asset('slider/img_3.png', 'images') }}" alt="">
+                        <figcaption>УЗИ</figcaption>
+                    </figure>
+                    <figure><img src="{{ asset('slider/img_4.png', 'images') }}" alt="">
+                        <figcaption>Анализы</figcaption>
+                    </figure>
+                </div>
+            </aside>
+        </div>
+        <div class="koguvcavis-varazdel">
+            <div class="sestim-donials">
+                <h1 class="h1">Услуги ветеринарной клиники в Казани</h1>
+                <div class="descr">
+                    Экспресс-анализы, прививки, справки, комплексные исследования, УЗИ, рентген, хирургия, экстренная помощь для домашних кошек, собак, грызунов и других питомцев. Современные методы лечения домашних животных в Казани.
+                </div>
+                <div class="sectionesag"></div>
+                <div class="sagestim-lonials">
+                    <div class="vemotau-vokusipol">
+                        <div class="testimonial">
+                            <div class="gecedanam">Для кошек</div>
+                            <img src="{{ asset('card/img.png', 'images') }}">
+                            <div class="desc">Обследование, стерилизация, кастрация, прививки и вакцинация, операции, УЗИ сердца и другие услуги для домашних кошек и котов</div>
+                        </div>
+                    </div>
+                    <div class="vemotau-vokusipol">
+                        <div class="testimonial">
+                            <div class="gecedanam">Для собак</div>
+                            <img src="{{ asset('card/img_1.png', 'images') }}">
+                            <div class="desc">Вакцинация от клещей, прививки, кастрация, капельницы, УЗИ, экспресс-анализы, лечение, экстренная помощь для домашних собак</div>
+                        </div>
+                    </div>
+                    <div class="vemotau-vokusipol">
+                        <div class="testimonial">
+                            <div class="gecedanam">Для грызунов</div>
+                            <img src="{{ asset('card/img_2.png', 'images') }}">
+                            <div class="desc">Вакцинация, прививки, экспресс-анализы, лечение, экстренная помощь для хомяков, кроликов, морских свинок и других грызунов</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

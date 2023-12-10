@@ -1,0 +1,218 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #fff;
+    margin: 2em;
+}
+
+.slperekhodnik{
+    max-width: 45em;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.gablok_sedakoda{
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slayder_karusel{
+    position: relative;
+    width: 500%;
+    font-size: 0;
+    animation: 18s gablok_sedakoda-ani infinite;
+}
+
+.slayder_karusel figure{
+    width: 20%;
+    height: auto;
+    display: inline-block;
+    position: inherit;
+}
+
+.slayder_karusel img{
+    max-width: 100%;
+    vertical-align: bottom;
+}
+
+.slayder_karusel figure figcaption{
+    position: absolute;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 1.4rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    width: 100%;
+    padding: .5em;
+}
+
+@keyframes gablok_sedakoda-ani{
+    0%{
+        left: 0%;
+    }
+
+    5%{
+        left: 0%;
+    }
+
+    10%{
+        left: 0%;
+    }
+
+    15%{
+        left: 0%;
+    }
+
+    20%{
+        left: -100%;
+    }
+
+    25%{
+        left: -100%;
+    }
+
+    30%{
+        left: -100%;
+    }
+
+    35%{
+        left: -100%;
+    }
+
+    40%{
+        left: -200%;
+    }
+
+    45%{
+        left: -200%;
+    }
+
+    50%{
+        left: -200%;
+    }
+
+    55%{
+        left: -200%;
+    }
+
+    60%{
+        left: -300%;
+    }
+
+    65%{
+        left: -300%;
+    }
+
+    70%{
+        left: -300%;
+    }
+
+    75%{
+        left: -300%;
+    }
+
+    80%{
+        left: -400%;
+    }
+
+    85%{
+        left: -400%;
+    }
+
+    90%{
+        left: -400%;
+    }
+
+    95%{
+        left: -400%;
+    }
+
+    100%{
+        left: 0%;
+    }
+
+}
+.koguvcavis-varazdel {
+    padding: 38px 0;
+    color: #2f2f2f;
+    text-align: center;
+}
+.sestim-donials{
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.sagestim-lonials{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.vemotau-vokusipol{
+    flex: 33.33%;
+    max-width: 33.33%;
+    box-sizing: border-box;
+    padding: 15px;
+}
+.testimonial {
+    padding: 28px;
+}
+.testimonial img{
+    width: 170px;
+    height: 170px;
+}
+.gecedanam{
+    font-family: 'TildaSans',Arial,sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin: 20px 0;
+}
+.desc{
+    font-size: 20px;
+    margin: 20px 0;
+}
+.apogered-gselected{
+    color: #53b32b;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width:960px) {
+    .vemotau-vokusipol{
+        flex: 100%;
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .vemotau-vokusipol{
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+.h1 {
+    font-family: 'TildaSans',Arial,sans-serif;
+    font-weight: 700;
+    color: #000000;
+}
+
+.descr {
+    max-width: 560px;
+    font-size: 22px;
+    line-height: 1.4;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'TildaSans',Arial,sans-serif;
+    font-weight: 300;
+    color: #000000;
+}

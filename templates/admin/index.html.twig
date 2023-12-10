@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Админ Панель{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('index.css', 'css') }}">
+{% endblock %}
 
 {% block body %}
-    Админ
+    <div>
+        <header class="header d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="{{ path('app_index') }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                <img class="img" src="{{ asset('logo.png', 'images') }}">
+                <span class="title fs-4 head">ZinClinic</span>
+            </a>
+            <ul class="nav nav-pills">
+                <span class="score fs-5 head">⭐{{ averageScore }}⭐</span>
+                <li class="nav-item"><a href="" class="nav-link">Список пользователей</a></li>
+                <li class="nav-item"><a href="" class="nav-link">Услуги</a></li>
+                <li class="nav-item"><a href="{{ path('app_logout') }}" class=" btn btn-danger" aria-current="page">Выйти</a></li>
+            </ul>
+        </header>
+    </div>
 {% endblock %}

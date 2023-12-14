@@ -18,7 +18,7 @@ security:
                 providers: [in_memory, app_user_provider]
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|petImages|js)/
             security: false
         main:
             lazy: true
@@ -40,7 +40,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/profile, roles: [ROLE_USER, ROLE_BLOCKED] }
 
 when@test:
     security:

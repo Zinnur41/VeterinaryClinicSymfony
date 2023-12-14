@@ -5,10 +5,24 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('profile.css', 'css') }}">
+    <link rel="stylesheet" href="{{ asset('blockedUserModal.css', 'css') }}"
 {% endblock %}
 
 {% block body %}
     {% include 'index/header.html.twig' %}
+
+    {% if is_granted('ROLE_BLOCKED') %}
+        <div id="popup">
+            <figure>
+                <figcaption>Вы заблокированы!</figcaption>
+                <div>
+                    <p>Напишите в тех. поддержку</p>
+                    <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_index') }}">Назад</a>
+                </div>
+            </figure>
+        </div>
+    {% endif %}
+
     {% if user.pets is not empty %}
         <h1 class="myPets">🐱Мои питомцы🐶</h1>
     {% endif %}
@@ -16,7 +30,7 @@
         {% for pet in user.pets %}
         <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src="{{ asset('uploads/images/' ~ pet.image) }}" height="300px" class="card-img-top" alt="...">
+                <img src="{{ asset('uploads/petImages/' ~ pet.image) }}" height="300px" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ pet.name }}</h5>
                 </div>
@@ -46,13 +60,4 @@
     </div>
 
 {% endblock %}
-
-{% block javascripts %}
-    <script src="{{ asset('assets/js/addPetModal.js') }}"></script>
-{% endblock %}
-
-
-
-
-
 

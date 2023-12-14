@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Пользователи {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('adminTable.css', 'css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="users">
+        <table class="table table-hover table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>№</th>
+                <th>email</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Номер телефона</th>
+                <th>Роль</th>
+                <th>Питомцы</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.secondName }}</td>
+                    <td>{{ user.thirdName }}</td>
+                    <td>{{ user.phoneNumber }}</td>
+                    <td>
+                        {% for role in user.roles %}
+                            {{ role }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for pet in user.pets %}
+                            {{ pet.name }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <form action="{{ path('app_admin_deleteUser', {id: user.id}) }}" method="post">
+                            <input type="hidden" name="id" value="{{ user.id }}">
+                            <input type="submit" class="btn btn-danger" value="Удалить">
+                        </form>
+                    </td>
+                    <td>
+                        {% if 'ROLE_BLOCKED' not in user.roles %}
+                        <form action="{{ path('app_admin_blockUser', {id: user.id}) }}" method="post">
+                            <input type="hidden" name="id" value="{{ user.id }}">
+                            <input type="submit" class="btn btn-danger" value="Заблокировать">
+                        </form>
+                        {% endif %}
+                        {% if 'ROLE_BLOCKED' in user.roles %}
+                            <form action="{{ path('app_admin_unlockUser', {id: user.id}) }}" method="post">
+                                <input type="hidden" name="id" value="{{ user.id }}">
+                                <input type="submit" class="btn btn-success" value="Разблокировать">
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

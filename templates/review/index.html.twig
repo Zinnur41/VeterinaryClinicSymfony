@@ -37,7 +37,7 @@
             {{ form(form) }}
         </div>
         <div class="image">
-            <img class="borzoiDog" src="{{ asset('borzoiDog.png', 'images') }}" alt="Ошибка">
+            <img class="borzoiDog" src="{{ asset('borzoiDog.png', 'petImages') }}" alt="Ошибка">
             <div class="description">
                 <p>Оставьте, пожалуйста, ваш отзыв</p>
             </div>
@@ -49,6 +49,8 @@
                 <span></span>
             </div>
         </a>
+    {% elseif is_granted('ROLE_BLOCKED') %}
+        <p>Вы не имеете права оставлять отзыв!</p>
     {% else %}
         <p>Чтобы оставить отзыв необходимо <a
                     class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"

@@ -27,7 +27,7 @@ class UserController extends AbstractController
                 $imageName = uniqid() . '.' . $imageFile->guessExtension();
 
                 $imageFile->move(
-                    $this->getParameter('images_directory'),
+                    $this->getParameter('petImages_directory'),
                     $imageName
                 );
                 $data = $form->getData();

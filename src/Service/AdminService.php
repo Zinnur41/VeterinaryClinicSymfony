@@ -18,4 +18,25 @@ class AdminService
     {
         return $this->entityManager->getRepository(User::class)->findAll();
     }
+
+    public function deleteUser(int $id): void
+    {
+        $user = $this->entityManager->getRepository(User::class)->find($id);
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+    }
+
+    public function blockUser(int $id): void
+    {
+        $user = $this->entityManager->getRepository(User::class)->find($id);
+        $user->setRoles(['ROLE_BLOCKED']);
+        $this->entityManager->flush();
+    }
+
+    public function unlockUser(int $id): void
+    {
+        $user = $this->entityManager->getRepository(User::class)->find($id);
+        $user->setRoles(['ROLE_USER']);
+        $this->entityManager->flush();
+    }
 }

@@ -42,13 +42,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20)]
     private ?string $phoneNumber = null;
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Pet::class)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Pet::class, orphanRemoval: true)]
     private Collection $pets;
 
-    #[ORM\OneToMany(mappedBy: 'reviewer', targetEntity: Review::class)]
+    #[ORM\OneToMany(mappedBy: 'reviewer', targetEntity: Review::class, orphanRemoval: true)]
     private Collection $reviews;
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Examination::class)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Examination::class, orphanRemoval: true)]
     private Collection $examinations;
 
     public function __construct()
@@ -92,8 +92,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 

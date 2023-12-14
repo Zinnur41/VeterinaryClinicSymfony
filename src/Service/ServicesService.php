@@ -18,4 +18,16 @@ class ServicesService
     {
         return $this->entityManager->getRepository(Services::class)->findAll();
     }
+
+    public function addService(array $fields, $image): void
+    {
+        $service = new Services();
+
+        $service->setService($fields['service']);
+        $service->setCost($fields['cost']);
+        $service->setImage($image);
+
+        $this->entityManager->persist($service);
+        $this->entityManager->flush();
+    }
 }

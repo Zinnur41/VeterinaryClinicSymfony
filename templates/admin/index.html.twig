@@ -17,8 +17,8 @@
             </a>
             <ul class="nav nav-pills">
                 <span class="score fs-5 head">⭐{{ averageScore }}⭐</span>
-                <li class="nav-item"><a href="" class="nav-link">Список пользователей</a></li>
-                <li class="nav-item"><a href="" class="nav-link">Услуги</a></li>
+                <li class="nav-item"><a href="{{ path('app_admin_getUsers') }}" class="nav-link">Список пользователей</a></li>
+                <li class="nav-item"><a href="{{ path('app_admin_service') }}" class="nav-link">Услуги</a></li>
                 <li class="nav-item"><a href="{{ path('app_logout') }}" class=" btn btn-danger" aria-current="page">Выйти</a></li>
             </ul>
         </header>

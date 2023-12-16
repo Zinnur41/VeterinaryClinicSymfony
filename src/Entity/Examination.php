@@ -20,11 +20,15 @@ class Examination
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column]
-    private ?int $cost = null;
 
     #[ORM\ManyToOne(inversedBy: 'examinations')]
     private ?user $owner = null;
+
+    #[ORM\ManyToOne(inversedBy: 'examinations')]
+    private ?Pet $pet = null;
+
+    #[ORM\ManyToOne(inversedBy: 'examinations')]
+    private ?Services $service = null;
 
     public function getId(): ?int
     {
@@ -75,6 +79,30 @@ class Examination
     public function setOwner(?user $owner): static
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getPet(): ?Pet
+    {
+        return $this->pet;
+    }
+
+    public function setPet(?Pet $pet): static
+    {
+        $this->pet = $pet;
+
+        return $this;
+    }
+
+    public function getService(): ?Services
+    {
+        return $this->service;
+    }
+
+    public function setService(?Services $service): static
+    {
+        $this->service = $service;
 
         return $this;
     }

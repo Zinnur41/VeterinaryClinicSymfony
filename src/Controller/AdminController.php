@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Services;
 use App\Form\ServiceFormType;
 use App\Service\AdminService;
 use App\Service\ReviewService;
@@ -53,9 +54,11 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/services', name: 'app_admin_service')]
-    public function addService(ServicesService $service, Request $request): Response
+    public function addService(Request $request, ServicesService $servicesService): Response
     {
-        $form = $this->createForm(ServiceFormType::class);
+        $services = new Services();
+
+        $form = $this->createForm(ServiceFormType::class, $services);
 
         $form->handleRequest($request);
 
@@ -68,16 +71,54 @@ class AdminController extends AbstractController
                     $this->getParameter('serviceImages_directory'),
                     $imageName
                 );
-                $data = $form->getData();
-                $service->addService($data, $imageName);
+                $servicesService->addService($services, $imageName);
                 return $this->redirectToRoute('app_admin_service');
             }
         }
-        $services = $service->getAllServices();
+        $allServices = $servicesService->getAllServices();
 
         return $this->render('admin/services.html.twig', [
             'form' => $form->createView(),
-            'services' => $services
+            'services' => $allServices
         ]);
+    }
+
+    #[Route('/admin/services/{id}/edit', name: 'app_admin_updateService')]
+    public function updateService(Request $request, ServicesService $servicesService, int $id): Response
+    {
+        $service = $servicesService->findService($id);
+
+        $form = $this->createForm(ServiceFormType::class, $service);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $imageName = uniqid() . '.' . $imageFile->guessExtension();
+
+                $imageFile->move(
+                    $this->getParameter('serviceImages_directory'),
+                    $imageName
+                );
+
+            } else {
+                $imageName = $service->getImage();
+            }
+            $servicesService->updateService($service, $imageName);
+            return $this->redirectToRoute('app_admin_service');
+        }
+
+        return $this->render('admin/updateServices.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+
+    #[Route('/admin/services/{id}/delete', name: 'app_admin_deleteService', methods: 'POST')]
+    public function deleteService(ServicesService $service, $id): Response
+    {
+        $service->deleteService($id);
+        return $this->redirectToRoute('app_admin_service');
     }
 }

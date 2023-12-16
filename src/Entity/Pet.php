@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PetRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PetRepository::class)]
@@ -33,6 +35,14 @@ class Pet
 
     #[ORM\Column(nullable: true)]
     private ?float $weight = null;
+
+    #[ORM\OneToMany(mappedBy: 'pet', targetEntity: Examination::class)]
+    private Collection $examinations;
+
+    public function __construct()
+    {
+        $this->examinations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +129,36 @@ class Pet
     public function setWeight(?float $weight): static
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Examination>
+     */
+    public function getExaminations(): Collection
+    {
+        return $this->examinations;
+    }
+
+    public function addExamination(Examination $examination): static
+    {
+        if (!$this->examinations->contains($examination)) {
+            $this->examinations->add($examination);
+            $examination->setPet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExamination(Examination $examination): static
+    {
+        if ($this->examinations->removeElement($examination)) {
+            // set the owning side to null (unless already changed)
+            if ($examination->getPet() === $this) {
+                $examination->setPet(null);
+            }
+        }
 
         return $this;
     }

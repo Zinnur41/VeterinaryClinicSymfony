@@ -19,15 +19,30 @@ class ServicesService
         return $this->entityManager->getRepository(Services::class)->findAll();
     }
 
-    public function addService(array $fields, $image): void
+    public function addService(Services $services, $image): void
     {
-        $service = new Services();
+        $services->setImage($image);
+        $this->entityManager->persist($services);
+        $this->entityManager->flush();
+    }
 
-        $service->setService($fields['service']);
-        $service->setCost($fields['cost']);
-        $service->setImage($image);
+    public function updateService(Services $services, $image = null): void
+    {
+        if ($image !== null) {
+            $services->setImage($image);
+        }
+        $this->entityManager->flush();
+    }
 
-        $this->entityManager->persist($service);
+    public function findService($id): Services
+    {
+        return $this->entityManager->getRepository(Services::class)->find($id);
+    }
+
+    public function deleteService(int $id): void
+    {
+        $service = $this->entityManager->getRepository(Services::class)->find($id);
+        $this->entityManager->remove($service);
         $this->entityManager->flush();
     }
 }

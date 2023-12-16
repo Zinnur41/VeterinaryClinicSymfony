@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Услуги {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('service.css', 'css') }}"
+{% endblock %}
+
+{% block body %}
+    {% include 'index/header.html.twig' %}
+    <div class="service row row-cols-1 row-cols-md-4 g-4">
+        {% for service in services %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ asset('uploads/serviceImages/' ~ service.image) }}" height="200px" class="card-img-top" alt="error">
+                <div class="card-body">
+                    <h5 class="card-title service-center">{{ service.service }}</h5>
+                    <p class="card-text service-center">{{ service.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item service-center">Стоимость {{ service.cost }} руб.</li>
+                    <li class="list-group-item service-center">
+                        <div class="css-modal-details">
+                            <details>
+                                <summary>Записаться</summary>
+                                <div class="cmc">
+                                    <div class="cmt">
+                                        вввввввввввввввввввввввввввввввввввввввввв
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block body %}
+    <header><a class="btn btn-primary" href="{{ path('app_admin') }}">Назад</a></header>
     <div class="users">
         <table class="table table-hover table-striped">
             <thead class="table-dark">
@@ -45,7 +46,6 @@
                     </td>
                     <td>
                         <form action="{{ path('app_admin_deleteUser', {id: user.id}) }}" method="post">
-                            <input type="hidden" name="id" value="{{ user.id }}">
                             <input type="submit" class="btn btn-danger" value="Удалить">
                         </form>
                     </td>
@@ -55,8 +55,7 @@
                             <input type="hidden" name="id" value="{{ user.id }}">
                             <input type="submit" class="btn btn-danger" value="Заблокировать">
                         </form>
-                        {% endif %}
-                        {% if 'ROLE_BLOCKED' in user.roles %}
+                        {% else %}
                             <form action="{{ path('app_admin_unlockUser', {id: user.id}) }}" method="post">
                                 <input type="hidden" name="id" value="{{ user.id }}">
                                 <input type="submit" class="btn btn-success" value="Разблокировать">

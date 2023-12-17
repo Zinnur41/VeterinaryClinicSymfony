@@ -21,16 +21,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item service-center">Стоимость {{ service.cost }} руб.</li>
                     <li class="list-group-item service-center">
-                        <div class="css-modal-details">
-                            <details>
-                                <summary>Записаться</summary>
-                                <div class="cmc">
-                                    <div class="cmt">
-                                        вввввввввввввввввввввввввввввввввввввввввв
-                                    </div>
-                                </div>
-                            </details>
-                        </div>
+                        <a href="{{ path('app_service_addexamination', {'id': service.id}) }}" class="button">Записаться</a>
                     </li>
                 </ul>
             </div>

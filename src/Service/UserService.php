@@ -2,7 +2,9 @@
 
 namespace App\Service;
 
+use App\Entity\Examination;
 use App\Entity\Pet;
+use App\Entity\Services;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -60,6 +62,30 @@ class UserService
         $pet->setOwner($user);
 
         $this->entityManager->persist($pet);
+        $this->entityManager->flush();
+    }
+
+    public function addExamination(array $fields, int $serviceId): void
+    {
+        $examination = new Examination();
+        $service = $this->entityManager->getRepository(Services::class)->find($serviceId);
+        $user = $this->security->getUser();
+        $pet = $this->entityManager->getRepository(Pet::class)->find($fields['pet']);
+
+        $examination->setService($service);
+        $examination->setOwner($user);
+        $examination->setPet($pet);
+        $examination->setDate($fields['date']);
+        $examination->setAddress($fields['address']);
+
+        $this->entityManager->persist($examination);
+        $this->entityManager->flush();
+    }
+
+    public function deleteExamination($id): void
+    {
+        $examination = $this->entityManager->getRepository(Examination::class)->find($id);
+        $this->entityManager->remove($examination);
         $this->entityManager->flush();
     }
 }

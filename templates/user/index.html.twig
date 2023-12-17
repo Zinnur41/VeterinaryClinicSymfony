@@ -17,46 +17,78 @@
                 <figcaption>Вы заблокированы!</figcaption>
                 <div>
                     <p>Напишите в тех. поддержку</p>
-                    <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_index') }}">Назад</a>
+                    <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                       href="{{ path('app_index') }}">Назад</a>
                 </div>
             </figure>
         </div>
     {% endif %}
+    {% if user.examinations is not empty %}
+        <h1 class="myPets">Мои записи</h1>
+
+        {% for examinate in user.examinations %}
+        <table class="table table-hover table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>№</th>
+                <th>Питомец</th>
+                <th>Адрес</th>
+                <th>Дата</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ examinate.pet.name }}</td>
+                <td>{{ examinate.address }}</td>
+                <td>{{ examinate.date | date('d M H:i') }}</td>
+                <td>
+                    <form action="{{ path('app_user_deleteExamination', {'id': examinate.id}) }}" method="post">
+                        <input class="btn btn-danger" type="submit" value="Отменить">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+    {% endif %}
 
     {% if user.pets is not empty %}
         <h1 class="myPets">🐱Мои питомцы🐶</h1>
-    {% endif %}
-    <div class="pets row row-cols-1 row-cols-md-3 g-4">
-        {% for pet in user.pets %}
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ asset('uploads/petImages/' ~ pet.image) }}" height="300px" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ pet.name }}</h5>
+        <div class="pets row row-cols-1 row-cols-md-3 g-4">
+            {% for pet in user.pets %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ asset('uploads/petImages/' ~ pet.image) }}" height="300px" class="card-img-top"
+                             alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pet.name }}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Порода: {{ pet.breed }}</li>
+                            <li class="list-group-item">Пол: {{ pet.gender }}</li>
+                            {% if pet.age == 1 or pet.age == 2 or pet.age == 3 or pet.age == 4 %}
+                                <li class="list-group-item">Возраст: {{ pet.age }} года</li>
+                            {% else %}
+                                <li class="list-group-item">Возраст: {{ pet.age }} лет</li>
+                            {% endif %}
+                            <li class="list-group-item">Вес: {{ pet.weight }}кг</li>
+                        </ul>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Порода: {{ pet.breed }}</li>
-                    <li class="list-group-item">Пол: {{ pet.gender }}</li>
-                    {% if pet.age == 1 or pet.age == 2 or pet.age == 3 or pet.age == 4 %}
-                        <li class="list-group-item">Возраст: {{ pet.age }} года</li>
-                    {% else %}
-                        <li class="list-group-item">Возраст: {{ pet.age }} лет</li>
-                    {% endif %}
-                    <li class="list-group-item">Вес: {{ pet.weight }}кг</li>
-                </ul>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    {% endif %}
     <div class="css-modal-details">
-    <details>
-        <summary>Добавить питомца</summary>
-        <div class="cmc">
-            <div class="cmt">
-                {{ form(form) }}
+        <details>
+            <summary>Добавить питомца</summary>
+            <div class="cmc">
+                <div class="cmt">
+                    {{ form(form) }}
+                </div>
             </div>
-        </div>
-    </details>
+        </details>
     </div>
 
 {% endblock %}

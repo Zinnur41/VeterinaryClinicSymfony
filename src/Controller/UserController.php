@@ -44,4 +44,10 @@ class UserController extends AbstractController
             'averageScore' => $averageScore
         ]);
     }
+    #[Route('/profile/deleteExamination/{id}', name: 'app_user_deleteExamination', methods: 'POST')]
+    public function deleteExamination(UserService $userService, $id): Response
+    {
+        $userService->deleteExamination($id);
+        return $this->redirectToRoute('app_user');
+    }
 }

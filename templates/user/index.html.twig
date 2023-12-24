@@ -25,32 +25,33 @@
     {% endif %}
     {% if user.examinations is not empty %}
         <h1 class="myPets">Мои записи</h1>
-
         {% for examinate in user.examinations %}
-        <table class="table table-hover table-striped">
-            <thead class="table-dark">
-            <tr>
-                <th>№</th>
-                <th>Питомец</th>
-                <th>Адрес</th>
-                <th>Дата</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ examinate.pet.name }}</td>
-                <td>{{ examinate.address }}</td>
-                <td>{{ examinate.date | date('d M H:i') }}</td>
-                <td>
-                    <form action="{{ path('app_user_deleteExamination', {'id': examinate.id}) }}" method="post">
-                        <input class="btn btn-danger" type="submit" value="Отменить">
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+            <div class="examination">
+                <table class="table table-hover table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>№</th>
+                        <th>Питомец</th>
+                        <th>Адрес</th>
+                        <th>Дата</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ examinate.pet.name }}</td>
+                        <td>{{ examinate.address }}</td>
+                        <td>{{ examinate.date | date('d M H:i') }}</td>
+                        <td>
+                            <form action="{{ path('app_user_deleteExamination', {'id': examinate.id}) }}" method="post">
+                                <input class="btn btn-danger" type="submit" value="Отменить">
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         {% endfor %}
     {% endif %}
 
@@ -92,4 +93,5 @@
     </div>
 
 {% endblock %}
+
 

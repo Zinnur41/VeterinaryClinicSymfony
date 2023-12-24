@@ -33,11 +33,11 @@
         </div>
     </div>
     {% if is_granted('ROLE_USER') %}
-        <div id="form">
+        <div id="form" class="form">
             {{ form(form) }}
         </div>
         <div class="image">
-            <img class="borzoiDog" src="{{ asset('borzoiDog.png', 'petImages') }}" alt="Ошибка">
+            <img class="borzoiDog" src="{{ asset('borzoiDog.png', 'images') }}" alt="Ошибка">
             <div class="description">
                 <p>Оставьте, пожалуйста, ваш отзыв</p>
             </div>
@@ -56,5 +56,10 @@
                     class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                     href="{{ path('app_login') }}">авторизоваться</a></p>
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('review.js', 'js') }}"></script>
 {% endblock %}
 

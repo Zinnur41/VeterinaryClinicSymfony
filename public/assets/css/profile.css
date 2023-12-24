@@ -155,3 +155,7 @@ body { overflow-x:hidden; }
         background: rgba(51, 122, 183, 0.7);
     }
 }
+
+.examination {
+    padding: 10px;
+}

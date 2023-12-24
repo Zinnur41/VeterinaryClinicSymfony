@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="{{ asset('register.css', 'css') }}">
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('register.js', 'js') }}"></script>
+{% endblock %}
+
 {% block body %}
     <header><a class="btn btn-primary" href="{{ path('app_index') }}">Назад</a></header>
     <div class="form">

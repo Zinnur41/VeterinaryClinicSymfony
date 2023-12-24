@@ -20,9 +20,11 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item service-center">Стоимость {{ service.cost }} руб.</li>
+                    {% if not is_granted('ROLE_BLOCKED') %}
                     <li class="list-group-item service-center">
                         <a href="{{ path('app_service_addexamination', {'id': service.id}) }}" class="button">Записаться</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

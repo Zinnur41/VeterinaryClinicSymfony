@@ -5,8 +5,9 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReviewFormType extends AbstractType
 {
@@ -21,9 +22,12 @@ class ReviewFormType extends AbstractType
                    '⭐⭐⭐⭐' => 4,
                    '⭐⭐⭐⭐⭐' => 5
                ],
-               'label' => 'Поставьте оценку'
+               'label' => 'Поставьте оценку',
+               'attr' => [
+                   'style' => 'width: 160px'
+               ]
            ])
-           ->add('comment', TextType::class, [
+           ->add('comment', TextareaType::class, [
                'label' => 'Оставьте отзыв'
            ])
            ->add('submit', SubmitType::class, [
@@ -32,5 +36,13 @@ class ReviewFormType extends AbstractType
                ],
                'label' => 'Оставить отзыв'
            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults([
+                'attr' => ['id' => 'review-id']
+            ]);
     }
 }

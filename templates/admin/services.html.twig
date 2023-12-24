@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    <header><a class="btn btn-primary" href="{{ path('app_admin') }}">Назад</a></header>
+    <header><a class="header-btn btn btn-primary" href="{{ path('app_admin') }}">Назад</a></header>
     <div class="service row row-cols-1 row-cols-md-4 g-4">
         {% for service in services %}
             <div class="col">
@@ -23,7 +23,7 @@
                         <li class="list-group-item">
                             <a class="service-left btn btn-success" href="{{ path('app_admin_updateService', {'id': service.id}) }}">Редактировать</a>
                             <form class="service-right" action="{{ path('app_admin_deleteService', {'id': service.id}) }}" method="post">
-                                <input type="submit" class="btn btn-danger" value="Удалить">
+                                <input type="submit" data-service-id="{{ service.id }}" class="delete-service-btn btn btn-danger" value="Удалить">
                             </form>
                         </li>
                     </ul>

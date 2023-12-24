@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ExaminationFormType extends AbstractType
 {
@@ -21,11 +22,10 @@ class ExaminationFormType extends AbstractType
     {
         $this->security = $security;
     }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /*$builder->addEventListener(FormEvents::PRE_SET_DATA, function (ExaminationFormType $examinationFormType) {
 
-        });*/
         $user = $this->security->getUser();
 
         $builder
@@ -59,6 +59,5 @@ class ExaminationFormType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Записаться'
             ]);
-
     }
 }

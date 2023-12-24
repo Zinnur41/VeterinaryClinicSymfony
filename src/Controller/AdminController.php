@@ -8,6 +8,7 @@ use App\Service\AdminService;
 use App\Service\ReviewService;
 use App\Service\ServicesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,24 +34,34 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/deleteUser/{id}', name: 'app_admin_deleteUser', methods: 'POST')]
-    public function deleteUser(AdminService $adminService, $id): Response
+    public function deleteUser(AdminService $adminService, $id): JsonResponse
     {
         $adminService->deleteUser($id);
-        return $this->redirectToRoute('app_admin_getUsers');
+        return new JsonResponse([
+            'success' => true,
+            'deletedId' => $id
+        ]);
     }
 
+
     #[Route('/admin/blockUser/{id}', name: 'app_admin_blockUser', methods: 'POST')]
-    public function blockUser(AdminService $adminService, $id): Response
+    public function blockUser(AdminService $adminService, $id): JsonResponse
     {
         $adminService->blockUser($id);
-        return $this->redirectToRoute('app_admin_getUsers');
+        return new JsonResponse([
+            'success' => true,
+            'blockedId' => $id
+        ]);
     }
 
     #[Route('/admin/unlockUser/{id}', name: 'app_admin_unlockUser', methods: 'POST')]
-    public function unlockUser(AdminService $adminService, $id): Response
+    public function unlockUser(AdminService $adminService, $id): JsonResponse
     {
         $adminService->unlockUser($id);
-        return $this->redirectToRoute('app_admin_getUsers');
+        return new JsonResponse([
+            'success' => true,
+            'unlockedId' => $id
+        ]);
     }
 
     #[Route('/admin/services', name: 'app_admin_service')]

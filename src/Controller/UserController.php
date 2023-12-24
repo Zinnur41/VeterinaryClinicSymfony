@@ -48,6 +48,7 @@ class UserController extends AbstractController
     public function deleteExamination(UserService $userService, $id): Response
     {
         $userService->deleteExamination($id);
+
         return $this->redirectToRoute('app_user');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -10,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class PetFormType extends AbstractType
 {
@@ -33,13 +36,24 @@ class PetFormType extends AbstractType
                 ],
             ])
             ->add('name', TextType::class, [
-                'label' => 'Кличка'
+                'label' => 'Кличка',
+                'constraints' => [
+                    new NotBlank(),
+                ]
             ])
             ->add('breed', TextType::class, [
-                'label' => 'Порода'
+                'label' => 'Порода',
+                'constraints' => [
+                    new NotBlank(),
+                    new Regex('/^[^\d]*$/', message: 'Не должно быть цифр!')
+                ]
             ])
-            ->add('gender', TextType::class, [
-                'label' => 'Пол'
+            ->add('gender', ChoiceType::class, [
+                'label' => 'Пол',
+                'choices' => [
+                    'Мужской' => 'Мужской',
+                    'Женский' => 'Женский'
+                ]
             ])
             ->add('age', IntegerType::class, [
                 'label' => 'Возраст'

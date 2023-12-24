@@ -22,7 +22,7 @@ class Examination
 
 
     #[ORM\ManyToOne(inversedBy: 'examinations')]
-    private ?user $owner = null;
+    private ?User $owner = null;
 
     #[ORM\ManyToOne(inversedBy: 'examinations')]
     private ?Pet $pet = null;

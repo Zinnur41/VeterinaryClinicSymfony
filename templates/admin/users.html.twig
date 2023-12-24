@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    <header><a class="btn btn-primary" href="{{ path('app_admin') }}">Назад</a></header>
+    <header><a class="header-btn btn btn-primary" href="{{ path('app_admin') }}">Назад</a></header>
     <div class="users">
         <table class="table table-hover table-striped">
             <thead class="table-dark">
@@ -46,19 +46,17 @@
                     </td>
                     <td>
                         <form action="{{ path('app_admin_deleteUser', {id: user.id}) }}" method="post">
-                            <input type="submit" class="btn btn-danger" value="Удалить">
+                            <input type="submit" data-user-id="{{ user.id }}" class="delete-btn btn btn-danger" value="Удалить">
                         </form>
                     </td>
                     <td>
                         {% if 'ROLE_BLOCKED' not in user.roles %}
                         <form action="{{ path('app_admin_blockUser', {id: user.id}) }}" method="post">
-                            <input type="hidden" name="id" value="{{ user.id }}">
-                            <input type="submit" class="btn btn-danger" value="Заблокировать">
+                            <input type="submit" data-user-id="{{ user.id }}" class="block-btn btn btn-danger" value="Заблокировать">
                         </form>
                         {% else %}
                             <form action="{{ path('app_admin_unlockUser', {id: user.id}) }}" method="post">
-                                <input type="hidden" name="id" value="{{ user.id }}">
-                                <input type="submit" class="btn btn-success" value="Разблокировать">
+                                <input type="submit" data-user-id="{{ user.id }}" class="unlock-btn btn btn-success" value="Разблокировать">
                             </form>
                         {% endif %}
                     </td>
@@ -67,4 +65,11 @@
             </tbody>
         </table>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('adminDeleteUser.js', 'js') }}"></script>
+    <script src="{{ asset('adminBlockUser.js', 'js') }}"></script>
+    <script src="{{ asset('adminUnlockUser.js', 'js') }}"></script>
 {% endblock %}
